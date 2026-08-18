@@ -1,0 +1,14 @@
+/**
+ * Admin Middleware
+ * Restricts access to Admin-only API endpoints
+ */
+
+const admin = (req, res, next) => {
+  if (req.user && req.user.role === 'admin') {
+    next();
+  } else {
+    res.status(403).json({ message: 'Access denied: Admin permissions required' });
+  }
+};
+
+module.exports = { admin };
